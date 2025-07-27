@@ -3,6 +3,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { OpenInV0Button } from "@/components/open-in-v0-button";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
@@ -16,6 +17,7 @@ import {
   PredefinedRange,
 } from "@/registry/new-york/ui/date-range-picker";
 import { DateRange } from "react-day-picker";
+import { Github } from "lucide-react";
 import {
   subDays,
   startOfWeek,
@@ -73,7 +75,25 @@ export default function Home() {
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
             Clocket UI Registry
           </h1>
-          <OpenInV0Button name="date-range-picker" className="w-fit" />
+          <div className="flex items-center gap-2">
+            <Button
+              variant="default"
+              size="sm"
+              asChild
+              className="w-fit bg-black hover:bg-gray-800 text-white"
+            >
+              <a
+                href="https://github.com/ther0y/clocket-ui"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2"
+              >
+                <Github className="h-4 w-4" />
+                <span className="hidden sm:inline">GitHub</span>
+              </a>
+            </Button>
+            <OpenInV0Button name="date-range-picker" className="w-fit" />
+          </div>
         </div>
         <p className="text-muted-foreground text-sm sm:text-base">
           A custom registry for distributing Clocket UI components using shadcn.
@@ -296,21 +316,67 @@ export default function Home() {
           </TabsContent>
 
           <TabsContent value="usage" className="space-y-6">
+            {/* Registry Setup */}
             <Card>
               <CardHeader>
-                <CardTitle>Installation & Usage</CardTitle>
+                <CardTitle>Registry Setup</CardTitle>
                 <CardDescription>
-                  How to install and use the date range picker component
+                  Configure your project to use the Clocket UI registry
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <h3 className="font-semibold mb-2">Installation</h3>
+                  <h3 className="font-semibold mb-2">
+                    1. Quick Install (Recommended)
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Install the date range picker directly using the shadcn CLI:
+                  </p>
                   <div className="bg-muted p-3 rounded-lg text-sm font-mono">
-                    npx shadcn@latest add date-range-picker
+                    npx shadcn@latest add
+                    https://ui.clocket.io/r/date-range-picker.json
                   </div>
                 </div>
 
+                <div>
+                  <h3 className="font-semibold mb-2">
+                    2. Install from Registry
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Add the registry to your project and then install
+                    components:
+                  </p>
+                  <div className="bg-muted p-3 rounded-lg text-sm font-mono space-y-2">
+                    <div>
+                      npx shadcn@latest add --registry https://ui.clocket.io
+                    </div>
+                    <div>npx shadcn@latest add date-range-picker</div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold mb-2">
+                    3. Install Dependencies
+                  </h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Make sure you have the required peer dependencies:
+                  </p>
+                  <div className="bg-muted p-3 rounded-lg text-sm font-mono">
+                    npm install react-day-picker date-fns lucide-react
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Usage Examples */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Usage Examples</CardTitle>
+                <CardDescription>
+                  How to use the date range picker component in your project
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
                 <div>
                   <h3 className="font-semibold mb-2">Basic Usage</h3>
                   <div className="bg-muted p-3 rounded-lg text-sm font-mono overflow-x-auto">
@@ -337,14 +403,21 @@ function MyComponent() {
                   <h3 className="font-semibold mb-2">Advanced Usage</h3>
                   <div className="bg-muted p-3 rounded-lg text-sm font-mono overflow-x-auto">
                     <pre>{`// With custom predefined ranges
+import { subDays, startOfWeek, endOfWeek } from "date-fns";
+
 const customRanges = [
   {
     label: "Last 7 days",
-    value: { from: subDays(new Date(), 6), to: new Date() }
+    value: { from: subDays(new Date(), 6), to: new Date() },
+    description: "Select the last 7 days"
   },
   {
-    label: "Last 30 days", 
-    value: { from: subDays(new Date(), 29), to: new Date() }
+    label: "This Week",
+    value: {
+      from: startOfWeek(new Date(), { weekStartsOn: 1 }),
+      to: endOfWeek(new Date(), { weekStartsOn: 1 })
+    },
+    description: "Select the current week"
   }
 ];
 
@@ -357,6 +430,26 @@ const customRanges = [
   minDate={subMonths(new Date(), 6)}
   maxDate={new Date()}
 />`}</pre>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold mb-2">TypeScript Types</h3>
+                  <div className="bg-muted p-3 rounded-lg text-sm font-mono overflow-x-auto">
+                    <pre>{`import { DateRange } from "react-day-picker";
+import { PredefinedRange } from "@/components/ui/date-range-picker";
+
+// Component state
+const [dateRange, setDateRange] = useState<DateRange | undefined>();
+
+// Custom ranges with proper typing
+const ranges: PredefinedRange[] = [
+  {
+    label: "Last 30 days",
+    value: { from: subDays(new Date(), 29), to: new Date() },
+    description?: "Optional description"
+  }
+];`}</pre>
                   </div>
                 </div>
               </CardContent>
