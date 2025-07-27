@@ -271,7 +271,7 @@ export function DateRangePicker({
     <div className="flex flex-col gap-4">
       <div className="flex-1">
         <Calendar
-          initialFocus
+          autoFocus
           mode="range"
           defaultMonth={defaultMonth}
           selected={tempRange}
@@ -280,8 +280,8 @@ export function DateRangePicker({
           className="rounded-md border"
           disabled={isDateDisabled}
           showOutsideDays={false}
-          toMonth={maxDate}
-          fromMonth={minDate || subMonths(new Date(), 12)}
+          endMonth={maxDate}
+          startMonth={minDate || subMonths(new Date(), 12)}
         />
       </div>
       <div className="flex justify-end gap-2 px-4">
@@ -311,7 +311,7 @@ export function DateRangePicker({
     <div className="flex flex-col">
       <div className="flex-1">
         <Calendar
-          initialFocus
+          autoFocus
           mode="range"
           defaultMonth={defaultMonth}
           selected={tempRange}
@@ -320,8 +320,8 @@ export function DateRangePicker({
           className="rounded-md border"
           disabled={isDateDisabled}
           showOutsideDays={false}
-          toMonth={maxDate}
-          fromMonth={minDate || subMonths(new Date(), 12)}
+          endMonth={maxDate}
+          startMonth={minDate || subMonths(new Date(), 12)}
         />
       </div>
       <div className="flex justify-end gap-2 pt-4">
