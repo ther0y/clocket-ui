@@ -1,51 +1,3 @@
-/**
- * Date Range Picker Component
- *
- * A production-ready, accessible date range picker component following shadcn/ui best practices.
- *
- * Features:
- * ✅ Fully accessible with ARIA labels and keyboard navigation
- * ✅ Mobile-responsive with adaptive layouts (desktop: side-by-side, mobile: stacked)
- * ✅ Performance optimized with React.memo, useCallback, and useMemo
- * ✅ TypeScript strict mode with comprehensive type definitions
- * ✅ Customizable predefined ranges with descriptions for screen readers
- * ✅ Date constraints support (min/max dates)
- * ✅ Flexible display options (calendar-only, ranges-only, or both)
- * ✅ Consistent styling with shadcn/ui design system
- * ✅ Comprehensive error handling and edge case validation
- * ✅ Test-friendly with data-testid support
- * ✅ Proper focus management and popover state handling
- *
- * Usage:
- * ```tsx
- * import { DateRangePicker } from "@/components/ui/date-range-picker";
- * import { DateRange } from "react-day-picker";
- *
- * function MyComponent() {
- *   const [dateRange, setDateRange] = useState<DateRange | undefined>();
- *
- *   return (
- *     <DateRangePicker
- *       value={dateRange}
- *       onChange={setDateRange}
- *       placeholder="Select date range"
- *       showPredefinedRanges={true}
- *       numberOfMonths={2}
- *     />
- *   );
- * }
- * ```
- *
- * Dependencies:
- * - date-fns: For date manipulation and formatting
- * - react-day-picker: For calendar functionality
- * - lucide-react: For icons
- * - shadcn/ui components: button, calendar, popover, scroll-area, select
- *
- * @version 1.0.0
- * @author shadcn/ui registry
- * @license MIT
- */
 "use client";
 
 import * as React from "react";
@@ -196,20 +148,6 @@ const isRangeEqual = (
   );
 };
 
-/**
- * A comprehensive date range picker component with predefined ranges and calendar selection.
- *
- * @example
- * ```tsx
- * const [dateRange, setDateRange] = useState<DateRange | undefined>();
- *
- * <DateRangePicker
- *   value={dateRange}
- *   onChange={setDateRange}
- *   placeholder="Select date range"
- * />
- * ```
- */
 export function DateRangePicker({
   value,
   onChange,
